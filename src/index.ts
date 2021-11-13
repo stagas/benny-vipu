@@ -96,5 +96,5 @@ export const finish = async () => {
 if (require.main === module) {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const options = decarg(new Options())!
-  run(path.join(process.cwd(), options.filename), options)
+  run(path.resolve(process.cwd(), options.filename), options)
 }
