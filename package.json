@@ -1,0 +1,83 @@
+{
+  "name": "benny-vipu",
+  "author": "stagas",
+  "short": "stagas/benny-vipu",
+  "description": "run benny benchmarks in the browser headless using vipu",
+  "version": "0.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://git@github.com:stagas/benny-vipu.git"
+  },
+  "keywords": [
+    "benchmark",
+    "browser",
+    "headless"
+  ],
+  "bin": {
+    "benny-vipu": "dist/cjs/index.js"
+  },
+  "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    }
+  },
+  "targets": {
+    "main": {
+      "context": "node",
+      "engines": {
+        "node": ">=16.0"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run build:cjs && npm run build:esm && rimraf dist/cjs/public && rimraf dist/esm/public && cp -R src/public dist/cjs/ && cp -R src/public dist/esm/ && echo done.",
+    "build:watch": "onchange -i src --await-write-finish 400 -- npm run build",
+    "docs": "documentation readme src --resolve=node --pe ts --re ts --re d.ts --github --section=API --markdown-toc-max-depth=3",
+    "test": "jest",
+    "cov": "jest --coverage",
+    "example": "fpick example --repeat -- node -r @swc-node/register example/runner.ts",
+    "lint": "eslint src && prettier --check src",
+    "test:watch": "jest --watchAll",
+    "cov:watch": "jest --coverage --watchAll",
+    "docs:watch": "onchange -i src --await-write-finish 400 -- npm run docs",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
+    "build:esm": "tsc -p tsconfig.esm.json && echo '{\"type\":\"module\"}' >dist/esm/package.json",
+    "lint:fix": "eslint --fix src && prettier --write src",
+    "clean": "rimraf dist",
+    "prepack": "npm run build",
+    "prepack:dry": "npm pack --dry-run",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@swc-node/jest": "^1.4.0",
+    "@swc-node/register": "^1.4.0",
+    "@tsconfig/node16": "^1.0.2",
+    "@types/jest": "^27.0.2",
+    "@types/node": "^16.11.7",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "@typescript-eslint/parser": "^5.3.1",
+    "documentation": "^13.2.5",
+    "eslint": "^8.2.0",
+    "eslint-plugin-import": "^2.25.3",
+    "fpick": "^1.1.0",
+    "husky": "^7.0.4",
+    "jest": "^27.3.1",
+    "onchange": "^7.1.0",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "benny": "^3.7.1",
+    "benny-ascii-chart-reporter": "^1.0.1",
+    "decarg": "^1.0.1",
+    "vipu": "^0.1.0"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "extends": "@tsconfig/node16/tsconfig.json",
+  "include": [
+    "example",
+    "src"
+  ],
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "baseUrl": ".",
+    "paths": {
+      "benny-vipu": [
+        "src/index.ts"
+      ],
+      "benny-vipu/*": [
+        "src/*"
+      ]
+    },
+    "outDir": "dist",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "declaration": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "module": "commonjs",
+    "target": "esnext",
+    "strict": true
+  }
+}
