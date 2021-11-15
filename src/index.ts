@@ -25,6 +25,15 @@ export class Options {
   @arg('-d', '--debug', 'Print debug information')
   debug = false
 
+  @arg('-p', '--precision', 'Results decimal precision digits (default: 2)')
+  precision = 2
+
+  @arg('-s', '--sort', 'Sort results by winners (default: false)')
+  sort = false
+
+  @arg('-w', '--width', 'Ascii chart width (default: 30)')
+  width = 30
+
   @arg('--min', 'Minimum iteration samples (default: 3)')
   minSamples = 3
 
@@ -40,6 +49,9 @@ export class Options {
  * @param options.clear Clear screen between page reloads
  * @param options.force Force cache renewal
  * @param options.debug Print debug information
+ * @param options.precision Results decimal precision digits (default: 2)
+ * @param options.sort Sort results by winners (default: false)
+ * @param options.width Ascii chart width (default: 30)
  * @param options.minSamples Minimum iteration samples (default: 3)
  * @param options.maxTime Maximum time in seconds (default: 1)
  */
@@ -76,10 +88,17 @@ export const run = async (
           minSamples: options.minSamples,
           maxTime: options.maxTime,
         },
+        minDisplayPrecision: options.precision,
       }),
       ...cases.map(c => add(c, () => () => client.runCase(name, c))),
       cycle(),
-      complete(asciiChartReporter({ reverse: true, sort: false })),
+      complete(
+        asciiChartReporter({
+          reverse: !options.sort,
+          sort: options.sort,
+          width: options.width,
+        }),
+      ),
       complete(),
     )
   }
