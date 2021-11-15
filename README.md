@@ -13,7 +13,7 @@ run <a href="https://github.com/caderek/benny">benny</a> benchmarks in the brows
  · <a href="https://github.com/stagas/benny-vipu/issues">   🖐️ <strong>Help</strong></a>
 </p>
 
-***
+---
 
 ## Install
 
@@ -23,15 +23,20 @@ $ npm i benny-vipu -g
 
 ## CLI
 
-    Usage: benny-vipu [options] <file>
+```
+Usage: benny-vipu [options] <file>
 
-                         <file>  Benchmark filename to run
+                     <file>  Benchmark filename to run
 
-       -c, --clear               Clear screen between page reloads
-       -f, --force               Force cache renewal
-       -d, --debug               Print debug information
-           --min=n               Minimum iteration samples (default: 3)
-           --max=n               Maximum time in seconds (default: 1)
+   -c, --clear               Clear screen between page reloads
+   -f, --force               Force cache renewal
+   -d, --debug               Print debug information
+   -p, --precision=n         Results decimal precision digits (default: 2)
+   -s, --sort                Sort results by winners (default: false)
+   -w, --width=n             Ascii chart width (default: 30)
+       --min=n               Minimum iteration samples (default: 3)
+       --max=n               Maximum time in seconds (default: 1)
+```
 
 ## Example
 
@@ -83,25 +88,28 @@ bench().then(finish)
 
 #### Table of Contents
 
-*   [run](#run)
-    *   [Parameters](#parameters)
+- [run](#run)
+  - [Parameters](#parameters)
 
 ### run
 
-[src/index.ts:46-86](https://github.com/stagas/benny-vipu/blob/a1ca7fe73f1c5f952c7624c5c10560d5ea7316aa/src/index.ts#L46-L86 "Source code on GitHub")
+[src/index.ts:58-105](https://github.com/stagas/benny-vipu/blob/9d2000e013e6d7c5a17179c5486c5333a8bbbf77/src/index.ts#L58-L105 'Source code on GitHub')
 
 Runs a given benchmark file.
 
 #### Parameters
 
-*   `filename` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The benchmark filename
-*   `options` **Options**  (optional, default `new Options()`)
+- `filename` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The benchmark filename
+- `options` **Options** (optional, default `new Options()`)
 
-    *   `options.clear`  Clear screen between page reloads
-    *   `options.force`  Force cache renewal
-    *   `options.debug`  Print debug information
-    *   `options.minSamples`  Minimum iteration samples (default: 3)
-    *   `options.maxTime`  Maximum time in seconds (default: 1)
+  - `options.clear` Clear screen between page reloads
+  - `options.force` Force cache renewal
+  - `options.debug` Print debug information
+  - `options.precision` Results decimal precision digits (default: 2)
+  - `options.sort` Sort results by winners (default: false)
+  - `options.width` Ascii chart width (default: 30)
+  - `options.minSamples` Minimum iteration samples (default: 3)
+  - `options.maxTime` Maximum time in seconds (default: 1)
 
 ## Contribute
 
